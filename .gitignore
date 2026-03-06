@@ -1,0 +1,14 @@
+# Entornos virtuales
+venv/
+.env/
+
+# Archivos de caché
+__pycache__/
+*.py[cod]
+
+# Flet build temporales
+build/
+.flet/
+
+# Bases de datos locales (opcional: si no quieres subir tus propios datos financieros reales al repo)
+mis_finanzas_datos.json
