@@ -229,27 +229,70 @@ def main(page: ft.Page):
         except Exception:
             mostrar_alerta("⚠️ Ingresa descripción y monto válido", RED_DIM)
 
+# 1. Función de Ingreso Corregida
+    def agregar_ingreso(e):
+        try:
+            val = float(ingreso_cantidad.value)
+            nombre = ingreso_nombre.value.strip()
+            if not nombre: raise ValueError
+            
+            datos["ingresos"].append({
+                "Fecha": datetime.now().strftime("%Y-%m-%d"), 
+                "Concepto": nombre, 
+                "Monto": val
+            })
+            guardar_datos(datos)
+            
+            # Limpiar y Refrescar
+            ingreso_nombre.value = ""
+            ingreso_cantidad.value = ""
+            renderizar_listas()   # Esto regenera las listas UI
+            page.update()         # ESTO ES LO QUE HACÍA FALTA
+            mostrar_alerta("✅ Ingreso guardado", GREEN_DIM)
+        except Exception:
+            mostrar_alerta("⚠️ Ingresa descripción y monto válido", RED_DIM)
+
+    # 2. Función de Gasto Corregida
     def agregar_gasto(e):
         try:
             val = float(gasto_cantidad.value)
             cat = categoria_seleccionada["valor"]
-            datos["gastos"].append({"Fecha": datetime.now().strftime("%Y-%m-%d"), "Concepto": cat, "Categoría": cat, "Monto": val})
+            
+            datos["gastos"].append({
+                "Fecha": datetime.now().strftime("%Y-%m-%d"), 
+                "Concepto": cat, 
+                "Categoría": cat, 
+                "Monto": val
+            })
             guardar_datos(datos)
+            
+            # Limpiar y Refrescar
             gasto_cantidad.value = ""
             renderizar_listas()
+            page.update()         # ESTO ES LO QUE HACÍA FALTA
             mostrar_alerta("✅ Gasto guardado", RED_DIM)
         except Exception:
             mostrar_alerta("⚠️ Ingresa un monto válido", RED_DIM)
 
+    # 3. Función de Deuda Corregida
     def agregar_deuda(e):
         try:
             val = float(deuda_cantidad.value)
-            if not deuda_nombre.value.strip(): raise ValueError
-            datos["deudas"].append({"Fecha": datetime.now().strftime("%Y-%m-%d"), "Concepto": deuda_nombre.value.strip(), "Monto": val})
+            nombre = deuda_nombre.value.strip()
+            if not nombre: raise ValueError
+            
+            datos["deudas"].append({
+                "Fecha": datetime.now().strftime("%Y-%m-%d"), 
+                "Concepto": nombre, 
+                "Monto": val
+            })
             guardar_datos(datos)
+            
+            # Limpiar y Refrescar
             deuda_nombre.value = ""
             deuda_cantidad.value = ""
             renderizar_listas()
+            page.update()         # ESTO ES LO QUE HACÍA FALTA
             mostrar_alerta("✅ Deuda registrada", ORANGE_DIM)
         except Exception:
             mostrar_alerta("⚠️ Ingresa nombre y monto válido", RED_DIM)
