@@ -162,7 +162,7 @@ def main(page: ft.Page):
             gradient=ft.LinearGradient([color_inicio, color_fin], begin=ft.Alignment(-1, 0), end=ft.Alignment(1, 0)),
             border_radius=18,
             padding=ft.padding.symmetric(vertical=16),
-            alignment=ft.alignment.center,
+            alignment=ft.Alignment(0, 0)
             on_click=handler,
             animate=ft.Animation(100, ft.AnimationCurve.EASE_IN_OUT),
         )
