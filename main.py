@@ -156,16 +156,15 @@ def main(page: ft.Page):
             padding=ft.padding.symmetric(horizontal=14, vertical=12),
         )
 
-    def boton_accion(texto, color_inicio, color_fin, handler):
+    def boton_accion(texto, color_fondo, color_texto, funcion):
         return ft.Container(
-            content=ft.Text(texto, size=14, color="#ffffff", weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
-            gradient=ft.LinearGradient([color_inicio, color_fin], begin=ft.Alignment(-1, 0), end=ft.Alignment(1, 0)),
-            border_radius=18,
-            padding=ft.padding.symmetric(vertical=16),
-            alignment=ft.Alignment(0, 0)
-            on_click=handler,
-            animate=ft.Animation(100, ft.AnimationCurve.EASE_IN_OUT),
-        )
+            content=ft.Text(texto, color=color_texto, weight="bold"),
+            bgcolor=color_fondo,
+            padding=15,
+            border_radius=10,
+            on_click=funcion,
+            alignment=ft.Alignment(0, 0),  # Asegúrate de que termine en coma ,
+    )
 
     # Snackbar centralizado
     def mostrar_alerta(mensaje, color):
